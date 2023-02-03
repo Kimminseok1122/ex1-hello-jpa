@@ -1,6 +1,8 @@
 package hellojpa;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity
@@ -12,12 +14,14 @@ public class Member {
     @Column(name = "USERNAME")
     private String username;
 
-    //    @Column(name = "TEAM_ID")
-    //    private Long teamId;
-
-    @ManyToOne//Member가 Many Team이 One
-    @JoinColumn(name = "TEAM_ID") //Join해야하는 Column
+    @ManyToOne
+    @JoinColumn(name = "TEAM_ID")
     private Team team;
+
+    @OneToOne
+    @JoinColumn(name = "LOCKER_ID")
+    private Locker locker;
+
 
     public Long getId() {
         return id;
@@ -41,5 +45,13 @@ public class Member {
 
     public void setTeam(Team team) {
         this.team = team;
+    }
+
+    public Locker getLocker() {
+        return locker;
+    }
+
+    public void setLocker(Locker locker) {
+        this.locker = locker;
     }
 }
